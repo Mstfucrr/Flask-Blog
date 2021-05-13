@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{% from "includes/formhelpers.html" import render_field %}
+{% if article %}
+<!-- {% from "includes/formhelpers.html" import render_field %} -->
+<h3>{{article.title}}</h3>
+<hr>
+Yazar : {{article.author}}
+<hr>
+Tarih : {{article.created_date}}
+<hr>
+
+{{article.content|safe}}
+
+<hr>
+{% if comments %}
+
+<div class="row m-2">
+    {% for comment in comments %}
+
+    <div class="media border col-md-8 my-3">
+        <div class="media-body m-1 mt-3">
+            <h6 class="mt-0 border-bottom d-inline-block pr-5 text-secondary">{{comment.username}} </h6>
+            <p class="mb-1 ml-2">
+                {{comment.comment_content}}
+            </p>
+            <div class="text-right">
+                <small class="text-muted">{{comment.created_date}} </small>
+            </div>
+        </div>
+
+    </div>
+
+    {% endfor %}
+</div>
+
+{% else %}
+
+<div class="w-50 alert alert-warning">Bu makalenin henüz bir yorumu bulunmuyor...</div>
+
+{% endif %}
+
+
+<hr>
+<div class="container row ml-1">
+    <div class="card col-md-8">
+        <div class="card-header">
+            <h6>{{session["username"]}}</h6>
+        </div>
+        <div class="card-body">
+            <form method="POST">
+                {{ render_field(form.comment,class="form-control")}}
+                <button type="submit" class="btn btn-danger">Gönder</button>
+            </form>
+        </div>
+    </div>
+</div>
+<hr>
+
+{% else %}
+<div class="alert alert-warning">
+    Böyle bir makale bulunamadı
+</div>
+{% endif %}
+
+{% endblock %}

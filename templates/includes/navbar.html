@@ -1,0 +1,43 @@
+{% block body %}
+
+<div class="sticky-top">
+    <nav class="navbar bg-dark navbar-dark navbar-expand-md">
+        <div class="container">
+            <a href="/" class="navbar-brand">
+                <i class="fas fa-home"></i>
+            </a>
+
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a href="/about" class="nav-link">Hakkımda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/articles" class="nav-link">Makaleler</a>
+                    </li>
+
+                </ul>
+
+                <ul class="navbar-nav ml-auto">
+
+                    {% if session["logged_in"] %}
+                    <li class="nav-item"><a href="/dashboard" class="nav-link"> <strong>Kontrol Paneli</strong></a></li>
+                    <li class="nav-item"><a href="/logout" class="nav-link"> Çıkış Yap</a></li>
+
+                    {% else %}
+                    <li class="nav-item"><a href="/login" class="nav-link">Giriş Yap</a></li>
+                    <li class="nav-item"><a href="/register" class="nav-link">Kayıt Ol</a></li>
+                    {% endif %}
+
+                </ul>
+            </div>
+
+
+        </div>
+    </nav>
+</div>
+{% endblock %}
